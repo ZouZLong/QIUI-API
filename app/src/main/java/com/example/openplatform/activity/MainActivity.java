@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         vm.getDeviceToken(this, httpURL + "/system/api/device/common/getDeviceToken", data, Api_Token);
     }
 
+
     public void decryBluetoothCommand(String string) {//解密
         Map<String, String> data = new HashMap<>();
         data.put("lockCommand", string);
