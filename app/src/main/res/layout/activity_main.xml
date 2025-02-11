@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.openplatform.activity.MainActivity.MyOnclick" />
+
+        <variable
+            name="onclick"
+            type="MyOnclick" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:onClick="@{() -> onclick.getApiToken()}"
+            android:text="获取API Token"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <Button
+            android:onClick="@{() -> onclick.conn()}"
+            android:text="连接设备"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <Button
+            android:onClick="@{() -> onclick.bind()}"
+            android:text="绑定设备"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <Button
+            android:onClick="@{() -> onclick.getToken()}"
+            android:text="获取token"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <Button
+            android:onClick="@{() -> onclick.unlock()}"
+            android:text="开锁"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <Button
+            android:onClick="@{() -> onclick.lock()}"
+            android:text="关锁"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+
+        <Button
+            android:onClick="@{() -> onclick.closeConn()}"
+            android:text="断开连接"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+    </LinearLayout>
+
+</layout>
