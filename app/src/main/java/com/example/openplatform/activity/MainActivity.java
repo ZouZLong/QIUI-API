@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         vm.getKeyPodLockCmd(this, httpURL + "/system/api/device/keyPod/getKeyPodLockCmd", data, Api_Token);
     }
 
+
     public void initData() {
         vm.getMutableLiveData01().observe(this, data -> {//获取平台Token
             if (data.getCode() == 200) {
