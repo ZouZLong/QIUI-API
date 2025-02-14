@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="com.example.openplatform.activity.MainActivity.MyOnclick" />
+        <import type="com.example.openplatform.activity.equipment.KeypodActivity01.MyOnclick" />
 
         <variable
             name="onclick"
@@ -18,22 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <Button
-            android:onClick="@{() -> onclick.getApiToken()}"
-            android:text="get API Token"
+            android:onClick="@{() -> onclick.unlock()}"
+            android:text="@string/language000648"
             android:layout_width="match_parent"
             android:layout_height="45dp"/>
 
         <Button
-            android:onClick="@{() -> onclick.conn()}"
-            android:text="@string/mylanguage000001"
+            android:onClick="@{() -> onclick.lock()}"
+            android:text="@string/language000649"
             android:layout_width="match_parent"
             android:layout_height="45dp"/>
 
+
         <Button
-            android:onClick="@{() -> onclick.changeLanguage()}"
-            android:text="切换中文"
+            android:onClick="@{() -> onclick.closeConn()}"
+            android:text="@string/mylanguage000002"
             android:layout_width="match_parent"
             android:layout_height="45dp"/>
 

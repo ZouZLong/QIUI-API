@@ -11,6 +11,7 @@ import com.example.openplatform.bean.AddDeviceInfoBean;
 import com.example.openplatform.bean.DecryBluetoothCommandBean;
 import com.example.openplatform.bean.GetDeviceTokenBean;
 import com.example.openplatform.bean.GetPlatformApiTokenBean;
+import com.example.openplatform.bean.QueryDeviceInfoBean;
 import com.example.openplatform.util.EncryptUtil;
 import com.example.openplatform.util.LogUtil;
 import com.google.gson.Gson;
@@ -81,7 +82,7 @@ public class MainVm extends ViewModel {
     public MutableLiveData<AddDeviceInfoBean> getMutableLiveData02() {
         if (mutableLiveData02 == null) {
             mutableLiveData02 = new MutableLiveData<>();
-            if (value01 != null) mutableLiveData02.setValue(value02);
+            if (value02 != null) mutableLiveData02.setValue(value02);
         }
         return mutableLiveData02;
     }
@@ -134,7 +135,7 @@ public class MainVm extends ViewModel {
     public MutableLiveData<GetDeviceTokenBean> getMutableLiveData03() {
         if (mutableLiveData03 == null) {
             mutableLiveData03 = new MutableLiveData<>();
-            if (value01 != null) mutableLiveData03.setValue(value03);
+            if (value03 != null) mutableLiveData03.setValue(value03);
         }
         return mutableLiveData03;
     }
@@ -186,7 +187,7 @@ public class MainVm extends ViewModel {
     public MutableLiveData<DecryBluetoothCommandBean> getMutableLiveData04() {
         if (mutableLiveData04 == null) {
             mutableLiveData04 = new MutableLiveData<>();
-            if (value01 != null) mutableLiveData04.setValue(value04);
+            if (value04 != null) mutableLiveData04.setValue(value04);
         }
         return mutableLiveData04;
     }
@@ -238,7 +239,7 @@ public class MainVm extends ViewModel {
     public MutableLiveData<GetDeviceTokenBean> getMutableLiveData05() {
         if (mutableLiveData05 == null) {
             mutableLiveData05 = new MutableLiveData<>();
-            if (value01 != null) mutableLiveData05.setValue(value05);
+            if (value05 != null) mutableLiveData05.setValue(value05);
         }
         return mutableLiveData05;
     }
@@ -290,7 +291,7 @@ public class MainVm extends ViewModel {
     public MutableLiveData<GetDeviceTokenBean> getMutableLiveData06() {
         if (mutableLiveData06 == null) {
             mutableLiveData06 = new MutableLiveData<>();
-            if (value01 != null) mutableLiveData06.setValue(value05);
+            if (value06 != null) mutableLiveData06.setValue(value06);
         }
         return mutableLiveData06;
     }
@@ -327,6 +328,58 @@ public class MainVm extends ViewModel {
                                 mutableLiveData06.setValue(value06);
                             } catch (Exception e) {
                                 LogUtil.loge("关锁 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+
+    private MutableLiveData<QueryDeviceInfoBean> mutableLiveData07;
+    private QueryDeviceInfoBean value07;
+
+    public MutableLiveData<QueryDeviceInfoBean> getMutableLiveData07() {
+        if (mutableLiveData07 == null) {
+            mutableLiveData07 = new MutableLiveData<>();
+            if (value07 != null) mutableLiveData07.setValue(value07);
+        }
+        return mutableLiveData07;
+    }
+
+    public void queryDeviceInfo(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("查询设备信息:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("查询设备信息:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("查询设备信息:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("查询设备信息:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("查询设备信息:" + response);
+                                value07 = new Gson().fromJson(response, QueryDeviceInfoBean.class);
+                                mutableLiveData07.setValue(value07);
+                            } catch (Exception e) {
+                                LogUtil.loge("查询设备信息 错误：" + e);
                             }
                         }
                     });
