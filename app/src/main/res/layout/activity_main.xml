@@ -12,30 +12,31 @@
     </data>
 
     <LinearLayout
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
 
         <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:onClick="@{() -> onclick.getApiToken()}"
-            android:text="get API Token"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"/>
+            android:text="get API Token" />
 
         <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:onClick="@{() -> onclick.conn()}"
-            android:text="@string/mylanguage000001"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"/>
+            android:text="@string/mylanguage000001" />
 
         <Button
-            android:onClick="@{() -> onclick.changeLanguage()}"
-            android:text="切换中文"
             android:layout_width="match_parent"
-            android:layout_height="45dp"/>
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.changeLanguage()}"
+            android:text="切换中文" />
 
     </LinearLayout>
 

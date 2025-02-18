@@ -195,4 +195,5 @@
     <dimen name="sp_3">3sp</dimen>
     <dimen name="sp_2">2sp</dimen>
     <dimen name="sp_1">1sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

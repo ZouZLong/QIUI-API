@@ -1,18 +1,46 @@
 [versions]
+activityCompose = "1.10.0"
 agp = "8.8.0"
+foundation = "1.7.8"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+lifecycleViewmodelCompose = "2.8.7"
 material = "1.12.0"
+kotlin = "2.1.0"
+coreKtx = "1.15.0"
+constraintlayout = "2.2.0"
+materialVersion = "1.7.8"
+navigationFragmentKtx = "2.8.7"
+navigationUiKtx = "2.8.7"
+runtimeLivedata = "1.7.8"
+ui = "1.7.8"
 
 [libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
+androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "materialVersion" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialVersion" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
+androidx-runtime-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2", version.ref = "runtimeLivedata" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "ui" }
+foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

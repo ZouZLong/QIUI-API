@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 允许修改wifi状态的权限 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- 允许修改网络状态的权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许访问wifi状态的权限 -->
@@ -13,29 +12,24 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- 接收推送主要权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 获取近期运行任务，用于应用是否活跃的判断 -->
     <uses-permission android:name="android.permission.REORDER_TASKS" /> <!-- 获取近期运行任务，用于应用是否活跃的判断 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
-    <!-- 通用权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 通用权限 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 开启网络访问权限 -->
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
-    <uses-permission android:name="android.permission.CAMERA" /><!-- 相机权限 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" /><!-- 麦克风权限 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 麦克风权限 -->
     <!-- targetSdkVersion 小于 33 获取读存储权限，用于附件等的获取 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- targetSdkVersion 大于等于 33 获取读存储权限，用于附件等的获取 需要申请不同的权限 -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /><!-- 用于读取图像文件（如照片）的权限。 -->
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /><!-- 用于读取视频文件的权限。 -->
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" /><!-- 用于读取音频文件的权限。 -->
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- targetSdkVersion 大于等于 33 获取读存储权限，用于附件等的获取 需要申请不同的权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- 用于读取图像文件（如照片）的权限。 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /> <!-- 用于读取视频文件的权限。 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" /> <!-- 用于读取音频文件的权限。 -->
     <!-- 蓝牙相关的权限 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问GPS定位 您的应用需要此权限，因为蓝牙扫描可用于收集用户的位置信息。此类信息可能来自用户自己的设备，以及在商店和交通设施等位置使用的蓝牙信标-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位  如果您的应用适配 Android 9（API 级别 28）或更低版本，则您可以声明 ACCESS_COARSE_LOCATION 权限而非 ACCESS_FINE_LOCATION 权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问GPS定位 您的应用需要此权限，因为蓝牙扫描可用于收集用户的位置信息。此类信息可能来自用户自己的设备，以及在商店和交通设施等位置使用的蓝牙信标 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位  如果您的应用适配 Android 9（API 级别 28）或更低版本，则您可以声明 ACCESS_COARSE_LOCATION 权限而非 ACCESS_FINE_LOCATION 权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 允许程序连接到已配对的蓝牙设备 您需要此权限才能执行任何蓝牙通信，例如请求连接、接受连接和传输数据等 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 允许程序发现和配对蓝牙设备  (个人理解：读写操作设备就要这个权限)根据用户请求修改蓝牙设置的“超级管理员”，否则不应使用此权限所授予的其他功能-->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /><!-- Android12以上需要的蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" /><!-- Android12以上需要的蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /><!-- Android12以上需要的蓝牙权限 -->
-
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 允许程序发现和配对蓝牙设备  (个人理解：读写操作设备就要这个权限)根据用户请求修改蓝牙设置的“超级管理员”，否则不应使用此权限所授予的其他功能 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /> <!-- Android12以上需要的蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" /> <!-- Android12以上需要的蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
     <application
         android:name=".MyApplication"
@@ -44,13 +38,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OpenPlatform"
-        android:networkSecurityConfig="@xml/network_security_config"
-        tools:targetApi="31" >
-
-
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:targetApi="31">
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
@@ -60,13 +52,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
-            android:name=".activity.equipment.KeypodActivity01"
+            android:name=".activity.equipment.KeyPodActivity01"
             tools:ignore="LockedOrientationActivity" />
-
-
+        <activity
+            android:name=".activity.equipment.Gen3Activity"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

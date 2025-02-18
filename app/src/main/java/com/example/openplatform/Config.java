@@ -14,4 +14,12 @@ public class Config {
      */
     public static final String httpURL = "https://openapi.qiuitoy.com";
 
+
+
+
+
+    public static final String MqttUserName = "";//MQTT账号
+    public static final String MqttPassWord = "";//MQTT密码
+    public static final String MqttUrl = "";//MQTT地址
+
 }

@@ -3,8 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
-        maven { url = uri("https://jitpack.io") }
+        maven("https://jitpack.io")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.2")
@@ -13,4 +12,6 @@ buildscript {
 
 plugins {
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }

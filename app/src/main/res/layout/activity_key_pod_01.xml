@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="com.example.openplatform.activity.equipment.KeypodActivity01.MyOnclick" />
+        <import type="com.example.openplatform.activity.equipment.KeyPodActivity01.MyOnclick" />
 
         <variable
             name="onclick"
@@ -12,6 +12,7 @@
     </data>
 
     <LinearLayout
+        android:fitsSystemWindows="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
         android:orientation="vertical"

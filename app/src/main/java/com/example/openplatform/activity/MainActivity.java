@@ -1,17 +1,14 @@
 package com.example.openplatform.activity;
 
 import static com.example.openplatform.Config.httpURL;
-import static com.example.openplatform.bluetooth.Constants.REQUEST_SUCCESS;
-import static com.example.openplatform.bluetooth.Constants.STATUS_CONNECTED;
-import static com.example.openplatform.bluetooth.Constants.STATUS_DISCONNECTED;
 
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,33 +16,22 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.openplatform.R;
-import com.example.openplatform.activity.equipment.KeypodActivity01;
-import com.example.openplatform.bluetooth.BluetoothClient;
-import com.example.openplatform.bluetooth.connect.listener.BleConnectStatusListener;
-import com.example.openplatform.bluetooth.connect.response.BleNotifyResponse;
-import com.example.openplatform.bluetooth.model.BleGattCharacter;
-import com.example.openplatform.bluetooth.model.BleGattProfile;
-import com.example.openplatform.bluetooth.model.BleGattService;
-import com.example.openplatform.bluetooth.search.SearchRequest;
-import com.example.openplatform.bluetooth.search.SearchResult;
-import com.example.openplatform.bluetooth.search.response.SearchResponse;
+import com.example.openplatform.activity.equipment.Gen3Activity;
+import com.example.openplatform.activity.equipment.KeyPodActivity01;
 import com.example.openplatform.databinding.ActivityMainBinding;
 import com.example.openplatform.fragment.SearchDeviceDialogFG;
 import com.example.openplatform.util.BlueToothUtil;
 import com.example.openplatform.util.JurisdictionUtil;
 import com.example.openplatform.util.LanguageUtils;
 import com.example.openplatform.util.LogUtil;
-import com.example.openplatform.util.StringUtil;
+import com.example.openplatform.util.StatusBarUtils;
 import com.example.openplatform.util.ToastUtil;
 import com.example.openplatform.vm.MainVm;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private String mac = "";
     private String Api_Token = "";
@@ -60,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(MainVm.class);
         binding.setLifecycleOwner(this); //绑定
         binding.setOnclick(new MyOnclick());
+
         init();
         initView();
         initData();
+        setNavigationBar(0);
     }
 
 
@@ -110,15 +98,20 @@ public class MainActivity extends AppCompatActivity {
                     //表示平台没有这个设备 先绑定
                     addDeviceInfo();
                 } else {
-                    Intent intent;
+                    Intent intent = null;
                     switch (data.getData().getTypeId()) {
-                        case 6:
-                            intent = new Intent(MainActivity.this, KeypodActivity01.class);
-                            intent.putExtra("mac", data.getData().getBluetoothAddress());
-                            intent.putExtra("Api_Token", Api_Token);
-                            intent.putExtra("serialNumber", data.getData().getSerialNumber());
-                            startActivity(intent);
+                        case 6://一代钥匙盒
+                            intent = new Intent(MainActivity.this, KeyPodActivity01.class);
                             break;
+                        case 10://三代锁
+                            intent = new Intent(MainActivity.this, Gen3Activity.class);
+                            break;
+                    }
+                    if (intent != null) {
+                        intent.putExtra("mac", data.getData().getBluetoothAddress());
+                        intent.putExtra("Api_Token", Api_Token);
+                        intent.putExtra("serialNumber", data.getData().getSerialNumber());
+                        startActivity(intent);
                     }
                 }
 
