@@ -13,7 +13,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:onClick="@{() -> onclick.unlock()}"
+            android:text="@string/language000648" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:onClick="@{() -> onclick.lock()}"
+            android:text="@string/language000649" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:text="@string/mylanguage000003"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.closeConn()}"
+            android:text="@string/mylanguage000002" />
 
     </LinearLayout>
 </layout>

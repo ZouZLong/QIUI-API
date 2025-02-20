@@ -2466,51 +2466,123 @@
     <string name="language001896">Reconnect</string>
 
 
+    <string name="textlanguage00001">Command sent by software</string>
+    <string name="textlanguage00002">Plaintext command</string>
+    <string name="textlanguage00003">Encrypted command</string>
+    <string name="textlanguage00004">Command returned by device</string>
+    <string name="textlanguage00005">Encrypted return</string>
+    <string name="textlanguage00006">Plaintext return</string>
+    <string name="textlanguage00007">Length</string>
+    <string name="textlanguage00008">Bluetooth connection</string>
+    <string name="textlanguage00009">4G connection</string>
+    <string name="textlanguage00010">Warehouse out</string>
+    <string name="textlanguage00011">Warehouse in</string>
+    <string name="textlanguage00012">Get SIM card IccID</string>
+    <string name="textlanguage00013">Set 4G send/receive topic</string>
+    <string name="textlanguage00014">0 Formal \n1 Warehouse</string>
+    <string name="textlanguage00015">Enable 4G</string>
+    <string name="textlanguage00016">Disable 4G</string>
+    <string name="textlanguage00017">Unlock</string>
+    <string name="textlanguage00018">Lock</string>
+    <string name="textlanguage00019">Below are uncommon commands</string>
+    <string name="textlanguage00020">Wake up device</string>
+    <string name="textlanguage00021">Enable will message</string>
+    <string name="textlanguage00022">Disable will message</string>
+    <string name="textlanguage00023">Clear timer</string>
+    <string name="textlanguage00024">Unlock time (seconds)\nDefault 6 seconds</string>
+    <string name="textlanguage00025">Voltage (0~3)\nDefault voltage 1</string>
+    <string name="textlanguage00026">Set timer unlock</string>
+    <string name="textlanguage00027">Query device timer</string>
+    <string name="textlanguage00028">Timer duration</string>
+    <string name="textlanguage00029">Timer voltage</string>
+    <string name="textlanguage00030">Shock intensity level\n1~5 Default 1</string>
+    <string name="textlanguage00031">Frequency mode\n1~3 Default 1</string>
+    <string name="textlanguage00032">Single shock</string>
+    <string name="textlanguage00033">Continuous shock</string>
+    <string name="textlanguage00034">Stop shock</string>
+    <string name="textlanguage00035">Shock intensity level\n1~5 Default 1</string>
+    <string name="textlanguage00036">Frequency mode\n1~3 Default 1</string>
+    <string name="textlanguage00037">Timer duration (seconds)\nDefault 6 seconds</string>
+    <string name="textlanguage00038">Shock duration (seconds)\nDefault 6 seconds</string>
+    <string name="textlanguage00039">Timed shock</string>
+    <string name="textlanguage00040">Clear timed shock</string>
+    <string name="textlanguage00041">Get MEI device ID</string>
+    <string name="textlanguage00042">MEI ID</string>
+    <string name="textlanguage00043">Get MAC</string>
+    <string name="textlanguage00044">Device MAC</string>
+    <string name="textlanguage00045">Use decimal point (.)\n192.168.1.1</string>
+    <string name="textlanguage00046">Port number\n4001</string>
+    <string name="textlanguage00047">Set IP and port</string>
+    <string name="textlanguage00048">Query IP and port</string>
+    <string name="textlanguage00049">Device IP</string>
+    <string name="textlanguage00050">Device port number</string>
+    <string name="textlanguage00051">Query SM card</string>
+    <string name="textlanguage00052">SM card information</string>
+    <string name="textlanguage00053">Query 4G signal strength</string>
+    <string name="textlanguage00054">4G signal strength</string>
+    <string name="textlanguage00055">Get TAC location</string>
+    <string name="textlanguage00056">TAC information</string>
+    <string name="textlanguage00057">Get coordinate location</string>
+    <string name="textlanguage00058">Coordinate location information</string>
+    <string name="textlanguage00059">Set working mode</string>
+    <string name="textlanguage00060">Working mode (0~2)</string>
+    <string name="textlanguage00061">Working duration (minutes)</string>
+    <string name="textlanguage00062">Set account</string>
+    <string name="textlanguage00063">MQTT account</string>
+    <string name="textlanguage00064">Set password</string>
+    <string name="textlanguage00065">MQTT password</string>
+    <string name="textlanguage00066">Set display direction</string>
+    <string name="textlanguage00067">ICCID is empty, warehousing failed, please get ICCID first!</string>
+    <string name="textlanguage00068">Length is incorrect, warehousing failed!</string>
+    <string name="textlanguage00069">Warehousing successful, device code:</string>
+    <string name="textlanguage00070">Warehouse out successful, device code:</string>
+    <string name="textlanguage00071">4G is enabled</string>
+    <string name="textlanguage00072">4G is disabled</string>
+    <string name="textlanguage00073">The entered IP format is incorrect</string>
+    <string name="textlanguage00074">The entered port format is incorrect</string>
+    <string name="textlanguage00075">Please enter working mode</string>
+    <string name="textlanguage00076">Set M0 mode</string>
+    <string name="textlanguage00077">Set M1 mode</string>
+    <string name="textlanguage00078">Username</string>
+    <string name="textlanguage00079">Please enter account</string>
+    <string name="textlanguage00080">Login</string>
+    <string name="textlanguage00081">Password</string>
+    <string name="textlanguage00082">Please enter password</string>
+    <string name="textlanguage00083">Login</string>
+    <string name="textlanguage00084">Connecting to device...</string>
+    <string name="textlanguage00085">Connection successful</string>
+    <string name="textlanguage00086">Device listening successful</string>
+    <string name="textlanguage00087">Device listening failed</string>
+    <string name="textlanguage00088">Connection disconnected</string>
+    <string name="textlanguage00089">Not received</string>
+    <string name="textlanguage00090">Battery level</string>
+    <string name="textlanguage00091">SM card normal</string>
+    <string name="textlanguage00092">SM card missing</string>
+    <string name="textlanguage00093">Unlock successful</string>
+    <string name="textlanguage00094">Unlock failed</string>
+    <string name="textlanguage00095">Lock successful</string>
+    <string name="textlanguage00096">Lock failed</string>
+    <string name="textlanguage00097">Timer set successfully</string>
+    <string name="textlanguage00098">Timer set failed</string>
+    <string name="textlanguage00099">Clear timer successful</string>
+    <string name="textlanguage00100">Clear timer failed</string>
+    <string name="textlanguage00101">No Bluetooth permission</string>
+    <string name="textlanguage00102">Third-generation lock (test)</string>
+    <string name="textlanguage00103">Third-generation lock (warehousing)</string>
+    <string name="textlanguage00104">Second-generation lock warehousing</string>
+    <string name="textlanguage00105">operate the device</string>
+    <string name="textlanguage00106">Second Generation Key Box Function</string>
+    <string name="textlanguage00107">Set Display Number</string>
+    <string name="textlanguage00108">Please Enter a 4-Digit Number</string>
+    <string name="textlanguage00109">Please Enter Display Time \nUnit (seconds)</string>
+
+
+
     <string name="mylanguage000001">Connecting devices</string>
     <string name="mylanguage000002">Disconnect</string>
+    <string name="mylanguage000003">Turn on 4G</string>
+
 
     <string name="lan">英语</string>
     <string name="qiui_1000000">Failed to load</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
 </resources>

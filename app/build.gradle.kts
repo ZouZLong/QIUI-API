@@ -58,6 +58,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //Compose
+    implementation(libs.androidx.ui.v105)
     implementation(libs.ui) //Compose ui 相关的基础支持
     implementation(libs.ui.tooling)//Compose ui 预览
     implementation(libs.foundation)//Compose 基于 ui 层封装的更实用的组件库比如 Scroll、Box 等
@@ -65,7 +66,6 @@ dependencies {
     implementation(libs.androidx.material.icons.core) //Compose Material design icons
     implementation(libs.androidx.material.icons.extended) //Compose Material design icons
     implementation(libs.androidx.activity.compose)// 将 Activity 支持 Compose
-    implementation(libs.ui.tooling)//Compose ui 相关的基础支持
     implementation(libs.androidx.lifecycle.viewmodel.compose)//Compose ViewModels 存储数据
     implementation(libs.androidx.runtime.livedata)//Compose 其他集成
     implementation(libs.androidx.runtime.rxjava2)//Compose 其他集成
@@ -75,4 +75,5 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.github.hannesa2:paho.mqtt.android:4.3")
     implementation("org.greenrobot:eventbus:3.1.1")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }

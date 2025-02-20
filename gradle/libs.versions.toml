@@ -3,8 +3,8 @@ activityCompose = "1.10.0"
 agp = "8.8.0"
 foundation = "1.7.8"
 junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+junitVersion = "1.1.5"
+espressoCore = "3.5.0"
 appcompat = "1.7.0"
 lifecycleViewmodelCompose = "2.8.7"
 material = "1.12.0"
@@ -16,6 +16,7 @@ navigationFragmentKtx = "2.8.7"
 navigationUiKtx = "2.8.7"
 runtimeLivedata = "1.7.8"
 ui = "1.7.8"
+uiVersion = "1.0.5"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -26,6 +27,7 @@ androidx-material-icons-extended = { module = "androidx.compose.material:materia
 androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
 androidx-runtime-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2", version.ref = "runtimeLivedata" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "ui" }
+androidx-ui-v105 = { module = "androidx.compose.ui:ui", version.ref = "uiVersion" }
 foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

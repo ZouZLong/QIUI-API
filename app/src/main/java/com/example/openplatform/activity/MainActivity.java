@@ -147,6 +147,11 @@ public class MainActivity extends BaseActivity {
             LanguageUtils.changeAppLanguage(MainActivity.this);
         }
 
+        public void test() {
+            //Intent intent = new Intent(MainActivity.this, TestActivity.class);
+            Intent intent = new Intent(MainActivity.this, Gen3Activity.class);
+            startActivity(intent);
+        }
     }
 
 

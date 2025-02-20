@@ -38,6 +38,12 @@
             android:onClick="@{() -> onclick.changeLanguage()}"
             android:text="切换中文" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.test()}"
+            android:text="测试" />
+
     </LinearLayout>
 
 </layout>
