@@ -149,8 +149,8 @@ public class MainActivity extends BaseActivity {
 
         public void test() {
             //Intent intent = new Intent(MainActivity.this, TestActivity.class);
-            Intent intent = new Intent(MainActivity.this, Gen3Activity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(MainActivity.this, Gen3Activity.class);
+            //startActivity(intent);
         }
     }
 

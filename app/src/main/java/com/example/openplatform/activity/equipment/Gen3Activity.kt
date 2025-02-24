@@ -32,7 +32,7 @@ class Gen3Activity : AppCompatActivity() {
     private var Api_Token: String? = ""
     private var serialNumber: String? = ""
 
-    private var bluetoothClient: BluetoothClient = BluetoothClient(this)
+    private var bluetoothClient: BluetoothClient? = null
     private val delayHandler = Handler() //延迟写入数据
 
     private var binding: ActivityGen3Binding? = null
@@ -56,7 +56,8 @@ class Gen3Activity : AppCompatActivity() {
         Api_Token = intent.getStringExtra("Api_Token")
         serialNumber = intent.getStringExtra("serialNumber")
 
-        bluetoothClient.registerConnectStatusListener(mac, mBleConnectStatusListener) //添加监听
+        bluetoothClient = BluetoothClient(this)
+        bluetoothClient!!.registerConnectStatusListener(mac, mBleConnectStatusListener) //添加监听
 
         startSearchDevice()
     }
@@ -153,14 +154,14 @@ class Gen3Activity : AppCompatActivity() {
             .searchBluetoothClassicDevice(5000) // 再扫经典蓝牙5s
             .searchBluetoothLeDevice(2000) // 再扫BLE设备2s
             .build()
-        bluetoothClient.search(request, object : SearchResponse {
+        bluetoothClient!!.search(request, object : SearchResponse {
             override fun onSearchStarted() { //开始连接
             }
 
             override fun onDeviceFounded(device: SearchResult) { //连接中
                 if (device.address == mac) { //将获取的地址 于设备地址进行匹配
-                    bluetoothClient.stopSearch() //停止搜索设备
-                    bluetoothClient.connect(device.address) { code: Int, profile: BleGattProfile ->  //连接设备
+                    bluetoothClient!!.stopSearch() //停止搜索设备
+                    bluetoothClient!!.connect(device.address) { code: Int, profile: BleGattProfile ->  //连接设备
                         val services = profile.services
                         for (service in services) {
                             val characters = service.characters
@@ -169,7 +170,7 @@ class Gen3Activity : AppCompatActivity() {
                             }
                         }
                         if (code == Constants.REQUEST_SUCCESS) {
-                            bluetoothClient.notify(device.address,
+                            bluetoothClient!!.notify(device.address,
                                 UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb"),
                                 UUID.fromString("0000fff2-0000-1000-8000-00805f9b34fb"),
                                 object : BleNotifyResponse {
@@ -225,16 +226,18 @@ class Gen3Activity : AppCompatActivity() {
     //断开蓝牙的监听
     fun disconnectBluetooth() {
         LogUtil.loge("断开连接")
-        bluetoothClient.stopSearch() //停止扫描
-        bluetoothClient.disconnect(mac) //断开连接
-        bluetoothClient.unregisterConnectStatusListener(mac, mBleConnectStatusListener) //停止监听
+        if (bluetoothClient != null) {
+            bluetoothClient!!.stopSearch() //停止扫描
+            bluetoothClient!!.disconnect(mac) //断开连接
+            bluetoothClient!!.unregisterConnectStatusListener(mac, mBleConnectStatusListener) //停止监听
+        }
     }
 
     //写入蓝牙命令
     fun writeBluetooth(decryptKey: String) {
         LogUtil.loge("写入蓝牙的命令:$decryptKey")
         delayHandler.postDelayed({
-            bluetoothClient.write(
+            bluetoothClient!!.write(
                 mac,
                 UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb"),
                 UUID.fromString("0000fff1-0000-1000-8000-00805f9b34fb"),
