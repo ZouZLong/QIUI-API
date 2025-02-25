@@ -248,6 +248,7 @@ public class MainVm extends ViewModel {
         try {
             JSONObject jsonObject = new JSONObject(data);
             String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("string:"+string);
             OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
                     .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
                     .tag(context).build().execute(new StringCallback() {
@@ -388,5 +389,212 @@ public class MainVm extends ViewModel {
         }
     }
 
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData08;
+    private GetDeviceTokenBean value08;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData08() {
+        if (mutableLiveData08 == null) {
+            mutableLiveData08 = new MutableLiveData<>();
+            if (value08 != null) mutableLiveData08.setValue(value08);
+        }
+        return mutableLiveData08;
+    }
+
+    public void buildCellMateProTimingUnlock(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("定时开锁:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("定时开锁:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("定时开锁:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("定时开锁:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("定时开锁:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("定时开锁:" + response);
+                                value08 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData08.setValue(value08);
+                            } catch (Exception e) {
+                                LogUtil.loge("定时开锁 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData09;
+    private GetDeviceTokenBean value09;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData09() {
+        if (mutableLiveData09 == null) {
+            mutableLiveData09 = new MutableLiveData<>();
+            if (value09 != null) mutableLiveData09.setValue(value09);
+        }
+        return mutableLiveData09;
+    }
+
+    public void buildCellMateProClearTimingUnlockCmd(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("清除定时开锁:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("清除定时开锁:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("清除定时开锁:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("清除定时开锁:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("清除定时开锁:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("清除定时开锁:" + response);
+                                value09 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData09.setValue(value09);
+                            } catch (Exception e) {
+                                LogUtil.loge("清除定时开锁 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData10;
+    private GetDeviceTokenBean value10;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData10() {
+        if (mutableLiveData10 == null) {
+            mutableLiveData10 = new MutableLiveData<>();
+            if (value10 != null) mutableLiveData10.setValue(value10);
+        }
+        return mutableLiveData10;
+    }
+
+    public void buildToyTimingElectricShock(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("定时电击:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("定时电击:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("定时电击:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("定时电击:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("定时电击:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("定时电击:" + response);
+                                value10 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData10.setValue(value10);
+                            } catch (Exception e) {
+                                LogUtil.loge("定时电击 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData11;
+    private GetDeviceTokenBean value11;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData11() {
+        if (mutableLiveData11 == null) {
+            mutableLiveData11 = new MutableLiveData<>();
+            if (value11 != null) mutableLiveData11.setValue(value11);
+        }
+        return mutableLiveData11;
+    }
+
+    public void buildCellMateProShockImmediatelyShockCmd(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("电击一秒:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("电击一秒:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("电击一秒:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("电击一秒:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("电击一秒:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("电击一秒:" + response);
+                                value11 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData11.setValue(value11);
+                            } catch (Exception e) {
+                                LogUtil.loge("电击一秒 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
 
 }

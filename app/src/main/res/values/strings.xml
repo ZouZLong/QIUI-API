@@ -2581,6 +2581,10 @@
     <string name="mylanguage000001">Connecting devices</string>
     <string name="mylanguage000002">Disconnect</string>
     <string name="mylanguage000003">Turn on 4G</string>
+    <string name="mylanguage000004">Electric shock for one second</string>
+    <string name="mylanguage000005">Electric shock for five seconds</string>
+    <string name="mylanguage000006">Stop the shock</string>
+    <string name="mylanguage000007">Setting up the MQTT service</string>
 
 
     <string name="lan">英语</string>

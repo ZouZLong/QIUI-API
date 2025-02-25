@@ -2580,6 +2580,10 @@
     <string name="mylanguage000001">连接设备</string>
     <string name="mylanguage000002">断开连接</string>
     <string name="mylanguage000003">开启4G</string>
+    <string name="mylanguage000004">电击一秒</string>
+    <string name="mylanguage000005">电击五秒</string>
+    <string name="mylanguage000006">停止电击</string>
+    <string name="mylanguage000007">设置MQTT服务</string>
 
 
     <string name="lan">简体语</string>

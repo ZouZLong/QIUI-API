@@ -14,8 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
@@ -31,10 +31,319 @@
             android:onClick="@{() -> onclick.lock()}"
             android:text="@string/language000649" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+
+            <EditText
+                android:id="@+id/timedUnlocking"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00024"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/timedUnlockingVoltage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00025"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.timedUnLocking()}"
+                android:text="@string/textlanguage00026"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.clearTiming()}"
+                android:text="@string/textlanguage00023"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+            <EditText
+                android:id="@+id/shockDuration"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00030"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/shockModel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00031"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/shockVolt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00025"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/timingDuration"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/language000429"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.myBuildToyTimingElectricShock()}"
+                android:text="@string/language000424"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.myBuildClearAllElectricShockCmd()}"
+                android:text="@string/textlanguage00040"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+            <EditText
+                android:id="@+id/shockModel01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00031"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/shockVolt01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00025"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.myBuildCellMateProShockImmediatelyShockCmd(0)}"
+                android:text="@string/mylanguage000004"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.myBuildCellMateProShockImmediatelyShockCmd(1)}"
+                android:text="@string/mylanguage000005"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_8"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.myBuildCellMateProShockImmediatelyShockCmd(2)}"
+                android:text="@string/mylanguage000006"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+
+            <EditText
+                android:id="@+id/setDisplayOrientation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="0~1"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.setDisplayOrientation()}"
+                android:text="@string/textlanguage00066"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+            <EditText
+                android:id="@+id/set4GType01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00060"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.set4GType()}"
+                android:text="@string/textlanguage00059"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:onClick="@{() -> onclick.setMQTT()}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:text="@string/mylanguage000007" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
-            android:text="@string/mylanguage000003"/>
+            android:text="@string/mylanguage000003" />
 
 
         <Button
