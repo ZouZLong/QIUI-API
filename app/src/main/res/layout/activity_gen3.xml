@@ -318,9 +318,9 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_marginStart="@dimen/dp_10"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
                 android:layout_weight="1"
                 android:background="@drawable/bg_cccccc_5"
                 android:gravity="center"
@@ -335,15 +335,25 @@
 
 
         <Button
-            android:onClick="@{() -> onclick.setMQTT()}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
+            android:onClick="@{() -> onclick.setMQTT()}"
             android:text="@string/mylanguage000007" />
 
         <Button
+            android:id="@+id/open4G"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
+            android:onClick="@{() -> onclick.open4G()}"
             android:text="@string/mylanguage000003" />
+
+        <Button
+            android:id="@+id/wakeDevice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:onClick="@{() -> onclick.wakeDevice()}"
+            android:text="@string/textlanguage00020"
+            android:visibility="gone" />
 
 
         <Button

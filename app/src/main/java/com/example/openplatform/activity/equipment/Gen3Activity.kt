@@ -2,7 +2,7 @@ package com.example.openplatform.activity.equipment
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.openplatform.Config
@@ -10,6 +10,7 @@ import com.example.openplatform.R
 import com.example.openplatform.activity.BaseActivity
 import com.example.openplatform.bean.DecryBluetoothCommandBean
 import com.example.openplatform.bean.GetDeviceTokenBean
+import com.example.openplatform.bean.MessageEvent
 import com.example.openplatform.bluetooth.BluetoothClient
 import com.example.openplatform.bluetooth.Constants
 import com.example.openplatform.bluetooth.connect.listener.BleConnectStatusListener
@@ -23,7 +24,12 @@ import com.example.openplatform.util.LogUtil
 import com.example.openplatform.util.StringUtil
 import com.example.openplatform.util.ToastUtil
 import com.example.openplatform.vm.MainVm
-import java.util.Objects
+import com.google.gson.Gson
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import java.util.Timer
+import java.util.TimerTask
 import java.util.UUID
 
 /**
@@ -36,6 +42,8 @@ class Gen3Activity : BaseActivity() {
 
     private var bluetoothClient: BluetoothClient? = null
     private val delayHandler = Handler() //延迟写入数据
+    private var isOpen4G: Boolean = false
+    private var timer: Timer? = null //定时器
 
     private var binding: ActivityGen3Binding? = null
     protected var vm: MainVm? = null
@@ -53,6 +61,8 @@ class Gen3Activity : BaseActivity() {
         initData()
 
         setNavigationBar(0)
+
+        if (!EventBus.getDefault().isRegistered(this)) EventBus.getDefault().register(this)
     }
 
     fun init() {
@@ -207,6 +217,14 @@ class Gen3Activity : BaseActivity() {
         )
     }
 
+    fun sendCellMatePro4GNotifyCmd() { //唤醒设备
+        vm!!.buildCellMateProShockImmediatelyShockCmd(
+            this,
+            Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GNotifyCmd",
+            createLockCmdData(), Api_Token
+        )
+    }
+
     fun initData() {
         vm!!.mutableLiveData03.observe(this) { data: GetDeviceTokenBean ->  //获取Token
             if (data.code == 200) writeBluetooth(data.data)
@@ -239,6 +257,31 @@ class Gen3Activity : BaseActivity() {
         //电击一秒 //电击五秒 //停止电击 //设置显示屏方向 //设置4G工作模式 //设置MQTT服务
         vm!!.mutableLiveData11.observe(this) { data: GetDeviceTokenBean ->
             if (data.code == 200) writeBluetooth(data.data)
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
+        try {
+            if (event.data != null && event.data["MqttMsg"] != null) { //MQTT 消息
+                val str: String
+                val ob: Any = event.data["MqttMsg"]!!
+                str = ob.toString()
+                LogUtil.loge("str:$str")
+//                val bean: ToUserDataBean = Gson().fromJson<T>(str, ToUserDataBean::class.java)
+//                if (bean.getReceiverID()
+//                        .equals(java.lang.String.valueOf(dataStorage.getUid())) && bean.getToyUid()
+//                        .equals(toyUid)
+//                ) { //接受者和设备是自己是才处理相关的命令
+//                    when (bean.getMqttType()) {
+//                        "mqtt_100012", "mqtt_h00014" -> {
+//
+//                        }
+//                    }
+//                }
+            }
+        } catch (e: Exception) {
+            LogUtil.loge("MqttMsg 错误：$e")
         }
     }
 
@@ -276,21 +319,33 @@ class Gen3Activity : BaseActivity() {
                 buildCellMateProStopAllShockCmd()//停止电击
         }
 
-        fun setDisplayOrientation(){//设置显示屏方向
+        fun setDisplayOrientation() {//设置显示屏方向
             buildDisplayDirectionCmd()
         }
 
-        fun set4GType(){//设置4G工作模式
+        fun set4GType() {//设置4G工作模式
             buildCellMatePro4GWorkModelCmd()
         }
 
-        fun setMQTT(){//设置MQTT服务
+        fun setMQTT() {//设置MQTT服务
             buildServerIpAndPortCmd()
         }
 
+        fun open4G() {//开启4G
+            isOpen4G = !isOpen4G
+            binding?.open4G?.text =
+                if (isOpen4G) getString(R.string.textlanguage00016) else getString(R.string.textlanguage00015)
+            binding?.wakeDevice?.visibility = if (isOpen4G) View.VISIBLE else View.GONE
+        }
+
+        fun wakeDevice() {//唤醒设备
+            staterElectricShock()
+        }
 
         fun closeConn() { //断开连接
             disconnectBluetooth()
+            val map: Map<String, Any> =hashMapOf("MqttMsg" to "断开连接").toMap()
+            EventBus.getDefault().post(MessageEvent(map))
         }
     }
 
@@ -407,5 +462,21 @@ class Gen3Activity : BaseActivity() {
         data["serialNumber"] = serialNumber
         data["typeId"] = 10
         return data
+    }
+
+    fun staterElectricShock() { //唤醒设备
+        if (timer == null) timer = Timer()
+        timer?.schedule(object : TimerTask() {
+            override fun run() {
+                sendCellMatePro4GNotifyCmd()
+            }
+        }, 0, 2000)
+    }
+
+    fun stopElectricShock() { //停止唤醒
+        if (timer != null) {
+            timer?.cancel()
+            timer = null
+        }
     }
 }

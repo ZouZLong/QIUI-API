@@ -18,8 +18,8 @@ public class Config {
 
 
 
-    public static final String MqttUserName = "";//MQTT账号
-    public static final String MqttPassWord = "";//MQTT密码
-    public static final String MqttUrl = "";//MQTT地址
+    public static final String MqttUserName = "mqtt_usr_7253ae60";//MQTT账号
+    public static final String MqttPassWord = "mqtt_pwd_65abd826";//MQTT密码
+    public static final String MqttUrl = "tcp://openmq.qiuitoy.com:1883";//MQTT地址
 
 }

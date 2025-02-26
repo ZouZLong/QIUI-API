@@ -20,6 +20,7 @@ import com.example.openplatform.activity.equipment.Gen3Activity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
 import com.example.openplatform.databinding.ActivityMainBinding;
 import com.example.openplatform.fragment.SearchDeviceDialogFG;
+import com.example.openplatform.mqtt.MqttKtManager;
 import com.example.openplatform.util.BlueToothUtil;
 import com.example.openplatform.util.JurisdictionUtil;
 import com.example.openplatform.util.LanguageUtils;
@@ -28,7 +29,10 @@ import com.example.openplatform.util.StatusBarUtils;
 import com.example.openplatform.util.ToastUtil;
 import com.example.openplatform.vm.MainVm;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends BaseActivity {
@@ -55,6 +59,16 @@ public class MainActivity extends BaseActivity {
 
 
     public void init() {
+
+        try {
+            MqttKtManager.Companion.stopMqtt();
+            List<String> strings = new ArrayList<>();//MQTT 订阅主题的列表
+            strings.add("device\\Client_35115347524B4D1CA9A20BF2F660EF49");
+            //strings.add("/6666");
+            MqttKtManager.Companion.init(this,  "abc123zbcv_" + getTimeStamp1(), strings);
+        } catch (Exception e) {
+            LogUtil.loge( "启动MQTT 错误：" + e);
+        }
 
     }
 
@@ -204,4 +218,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    public static String getTimeStamp1() {//防止追加ID重复  手动+100~200的随机毫秒
+        return String.valueOf(Calendar.getInstance().getTimeInMillis() + (int) (1000 + Math.random() * (3000 - 1000 + 1000)));
+    }
 }

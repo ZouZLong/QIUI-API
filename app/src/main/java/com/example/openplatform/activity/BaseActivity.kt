@@ -6,12 +6,12 @@ import android.view.View
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.openplatform.util.StatusBarUtils
+import org.greenrobot.eventbus.EventBus
 
 open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
 
@@ -27,7 +27,8 @@ open class BaseActivity : AppCompatActivity() {
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
                 )
             } else {
-                decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                decor.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
         }
     }
