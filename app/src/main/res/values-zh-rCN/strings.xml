@@ -2584,6 +2584,7 @@
     <string name="mylanguage000005">电击五秒</string>
     <string name="mylanguage000006">停止电击</string>
     <string name="mylanguage000007">设置MQTT服务</string>
+    <string name="mylanguage000008">唤醒成功</string>
 
 
     <string name="lan">简体语</string>

@@ -597,4 +597,57 @@ public class MainVm extends ViewModel {
         }
     }
 
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData12;
+    private GetDeviceTokenBean value12;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData12() {
+        if (mutableLiveData12 == null) {
+            mutableLiveData12 = new MutableLiveData<>();
+            if (value12 != null) mutableLiveData12.setValue(value12);
+        }
+        return mutableLiveData12;
+    }
+
+    public void send4G(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("发送4G:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("发送4G:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("发送4G:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("发送4G:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("发送4G:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("发送4G:" + response);
+                                value12 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData12.setValue(value12);
+                            } catch (Exception e) {
+                                LogUtil.loge("发送4G 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
 }

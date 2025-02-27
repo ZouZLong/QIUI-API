@@ -2585,6 +2585,7 @@
     <string name="mylanguage000005">Electric shock for five seconds</string>
     <string name="mylanguage000006">Stop the shock</string>
     <string name="mylanguage000007">Setting up the MQTT service</string>
+    <string name="mylanguage000008">Wake up successfully</string>
 
 
     <string name="lan">英语</string>
