@@ -52,9 +52,7 @@ class Gen3Activity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gen3)
-        vm = ViewModelProvider(
-            this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get<MainVm>(MainVm::class.java)
+        vm = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get<MainVm>(MainVm::class.java)
         binding?.setLifecycleOwner(this) //绑定
         binding?.setOnclick(MyOnclick())
         init()
@@ -82,17 +80,9 @@ class Gen3Activity : BaseActivity() {
 
     fun deviceToken() { //获取Token
         if (!isOpen4G) {
-            vm!!.getDeviceToken(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GTokenCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.getDeviceToken(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GTokenCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GTokenCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GTokenCmd", createLockCmdData(), Api_Token)
         }
     }
 
@@ -100,42 +90,23 @@ class Gen3Activity : BaseActivity() {
         val data: MutableMap<String, String?> = HashMap()
         data["lockCommand"] = string
         data["serialNumber"] = serialNumber
-        vm!!.decryBluetoothCommand(
-            this, Config.httpURL + "/system/api/device/cellMate/decryBluetoothCommand",
-            data, Api_Token
-        )
+        vm!!.decryBluetoothCommand(this, Config.httpURL + "/system/api/device/cellMate/decryBluetoothCommand", data, Api_Token)
     }
 
     fun keyPodUnlockCmd() { //开锁
         if (!isOpen4G) {
-            vm!!.getKeyPodUnlockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GUnLockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.getKeyPodUnlockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GUnLockCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GUnLockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GUnLockCmd", createLockCmdData(), Api_Token)
         }
 
     }
 
     fun keyPodLockCmd() { //关锁
         if (!isOpen4G) {
-            vm!!.getKeyPodLockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GLockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.getKeyPodLockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GLockCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GLockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GLockCmd", createLockCmdData(), Api_Token)
         }
     }
 
@@ -145,33 +116,17 @@ class Gen3Activity : BaseActivity() {
         data["shockVolt"] = binding?.timedUnlockingVoltage?.text.toString()
         data["basicDeviceApiReq"] = createLockCmdData()
         if (!isOpen4G) {
-            vm!!.buildCellMateProTimingUnlock(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProTimingUnlock",
-                data, Api_Token
-            )
+            vm!!.buildCellMateProTimingUnlock(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProTimingUnlock", data, Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProTimingUnlock",
-                data, Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProTimingUnlock", data, Api_Token)
         }
     }
 
     fun buildCellMateProClearTimingUnlockCmd() { //清除定时开锁
         if (!isOpen4G) {
-            vm!!.buildCellMateProClearTimingUnlockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProClearTimingUnlockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.buildCellMateProClearTimingUnlockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProClearTimingUnlockCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProClearTimingUnlockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProClearTimingUnlockCmd", createLockCmdData(), Api_Token)
         }
     }
 
@@ -183,33 +138,17 @@ class Gen3Activity : BaseActivity() {
         data["timingDuration"] = binding?.timingDuration?.text.toString()
         data["basicDeviceApiReq"] = createLockCmdData()
         if (!isOpen4G) {
-            vm!!.buildToyTimingElectricShock(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildToyTimingElectricShock",
-                data, Api_Token
-            )
+            vm!!.buildToyTimingElectricShock(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildToyTimingElectricShock", data, Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendToyTimingElectricShock",
-                data, Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendToyTimingElectricShock", data, Api_Token)
         }
     }
 
     fun buildClearAllElectricShockCmd() { //清除定时电击
         if (!isOpen4G) {
-            vm!!.buildCellMateProClearTimingUnlockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildClearAllElectricShockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.buildCellMateProClearTimingUnlockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildClearAllElectricShockCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendClearAllElectricShockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendClearAllElectricShockCmd", createLockCmdData(), Api_Token)
         }
     }
 
@@ -219,17 +158,9 @@ class Gen3Activity : BaseActivity() {
         data["shockVolt"] = binding?.shockVolt01?.text.toString().toInt()
         data["basicDeviceApiReq"] = createLockCmdData()
         if (!isOpen4G) {
-            vm!!.buildCellMateProShockImmediatelyShockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProShockImmediatelyShockCmd",
-                data, Api_Token
-            )
+            vm!!.buildCellMateProShockImmediatelyShockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProShockImmediatelyShockCmd", data, Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProShockImmediatelyShockCmd",
-                data, Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProShockImmediatelyShockCmd", data, Api_Token)
         }
     }
 
@@ -239,33 +170,17 @@ class Gen3Activity : BaseActivity() {
         data["shockVolt"] = binding?.shockVolt01?.text.toString().toInt()
         data["basicDeviceApiReq"] = createLockCmdData()
         if (!isOpen4G) {
-            vm!!.buildCellMateProShockImmediatelyShockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProShockContinuedFiveSecond",
-                data, Api_Token
-            )
+            vm!!.buildCellMateProShockImmediatelyShockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProShockContinuedFiveSecond", data, Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProShockContinuedFiveSecond",
-                data, Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProShockContinuedFiveSecond", data, Api_Token)
         }
     }
 
     fun buildCellMateProStopAllShockCmd() { //停止电击
         if (!isOpen4G) {
-            vm!!.buildCellMateProShockImmediatelyShockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProStopAllShockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.buildCellMateProShockImmediatelyShockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMateProStopAllShockCmd", createLockCmdData(), Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProStopAllShockCmd",
-                createLockCmdData(), Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMateProStopAllShockCmd", createLockCmdData(), Api_Token)
         }
     }
 
@@ -273,11 +188,7 @@ class Gen3Activity : BaseActivity() {
         val data: MutableMap<String, Any> = HashMap()
         data["direction"] = binding?.setDisplayOrientation?.text.toString().toInt()
         data["basicDeviceApiReq"] = createLockCmdData()
-        vm!!.send4G(
-            this,
-            Config.httpURL + "/system/api/device/cellMate/bluetooth/buildDisplayDirectionCmd",
-            data, Api_Token
-        )
+        vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildDisplayDirectionCmd", data, Api_Token)
     }
 
     fun buildCellMatePro4GWorkModelCmd() { //设置4G工作模式
@@ -285,34 +196,18 @@ class Gen3Activity : BaseActivity() {
         data["workStatus"] = binding?.set4GType01?.text.toString().toInt()
         data["basicDeviceApiReq"] = createLockCmdData()
         if (!isOpen4G) {
-            vm!!.buildCellMateProShockImmediatelyShockCmd(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GWorkModelCmd",
-                data, Api_Token
-            )
+            vm!!.buildCellMateProShockImmediatelyShockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildCellMatePro4GWorkModelCmd", data, Api_Token)
         } else {
-            vm!!.send4G(
-                this,
-                Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GWorkModelCmd",
-                data, Api_Token
-            )
+            vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GWorkModelCmd", data, Api_Token)
         }
     }
 
     fun buildServerIpAndPortCmd() { //设置MQTT服务
-        vm!!.buildCellMateProShockImmediatelyShockCmd(
-            this,
-            Config.httpURL + "/system/api/device/cellMate/bluetooth/buildServerIpAndPortCmd",
-            createLockCmdData(), Api_Token
-        )
+        vm!!.buildCellMateProShockImmediatelyShockCmd(this, Config.httpURL + "/system/api/device/cellMate/bluetooth/buildServerIpAndPortCmd", createLockCmdData(), Api_Token)
     }
 
     fun sendCellMatePro4GNotifyCmd() { //唤醒设备
-        vm!!.send4G(
-            this,
-            Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GNotifyCmd",
-            createLockCmdData(), Api_Token
-        )
+        vm!!.send4G(this, Config.httpURL + "/system/api/device/cellMate/4g/sendCellMatePro4GNotifyCmd", createLockCmdData(), Api_Token)
     }
 
     fun initData() {
@@ -356,8 +251,7 @@ class Gen3Activity : BaseActivity() {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: MessageEvent) {
+    @Subscribe(threadMode = ThreadMode.MAIN) fun onMessageEvent(event: MessageEvent) {
         try {
             if (event.data != null && event.data["MqttMsg"] != null) { //MQTT 消息
                 val str: String
@@ -366,17 +260,17 @@ class Gen3Activity : BaseActivity() {
                 LogUtil.loge("str:$str")
                 val bean: MqttMsg = Gson().fromJson(str, MqttMsg::class.java)
 
-                LogUtil.loge("bluetoothAddress:"+bean.bluetoothAddress)
+                LogUtil.loge("bluetoothAddress:" + bean.bluetoothAddress)
                 LogUtil.loge("mac:$mac")
 
                 if (bean.bluetoothAddress == mac) { //接受者和设备是自己是才处理相关的命令
                     when (bean.mqttType) {
-                        "mqtt_h00001" -> {//唤醒成功
+                        "mqtt_h00001" -> { //唤醒成功
                             stopElectricShock()
                             ToastUtil.showToastCenter(getString(R.string.mylanguage000008))
                             deviceToken()
                         }
-                        "mqtt_h00012"->{
+                        "mqtt_h00012" -> {
 
                         }
 
@@ -397,54 +291,50 @@ class Gen3Activity : BaseActivity() {
             keyPodLockCmd()
         }
 
-        fun timedUnLocking() {//定时开锁
+        fun timedUnLocking() { //定时开锁
             buildCellMateProTimingUnlock()
         }
 
-        fun clearTiming() {//清除定时开锁
+        fun clearTiming() { //清除定时开锁
             buildCellMateProClearTimingUnlockCmd()
         }
 
-        fun myBuildToyTimingElectricShock() {//定时电击
+        fun myBuildToyTimingElectricShock() { //定时电击
             buildToyTimingElectricShock()
         }
 
-        fun myBuildClearAllElectricShockCmd() {//清除定时电击
+        fun myBuildClearAllElectricShockCmd() { //清除定时电击
             buildClearAllElectricShockCmd()
         }
 
         fun myBuildCellMateProShockImmediatelyShockCmd(number: Int) {
-            if (number == 0)
-                buildCellMateProShockImmediatelyShockCmd()//电击一秒
-            if (number == 1)
-                buildCellMateProShockContinuedFiveSecond()//电击五秒
-            if (number == 2)
-                buildCellMateProStopAllShockCmd()//停止电击
+            if (number == 0) buildCellMateProShockImmediatelyShockCmd() //电击一秒
+            if (number == 1) buildCellMateProShockContinuedFiveSecond() //电击五秒
+            if (number == 2) buildCellMateProStopAllShockCmd() //停止电击
         }
 
-        fun setDisplayOrientation() {//设置显示屏方向
+        fun setDisplayOrientation() { //设置显示屏方向
             buildDisplayDirectionCmd()
         }
 
-        fun set4GType() {//设置4G工作模式
+        fun set4GType() { //设置4G工作模式
             buildCellMatePro4GWorkModelCmd()
         }
 
-        fun setMQTT() {//设置MQTT服务
+        fun setMQTT() { //设置MQTT服务
             buildServerIpAndPortCmd()
         }
 
-        fun open4G() {//开启4G
+        fun open4G() { //开启4G
             isOpen4G = !isOpen4G
-            binding?.open4G?.text =
-                if (isOpen4G) getString(R.string.textlanguage00016) else getString(R.string.textlanguage00015)
+            binding?.open4G?.text = if (isOpen4G) getString(R.string.textlanguage00016) else getString(R.string.textlanguage00015)
             binding?.wakeDevice?.visibility = if (isOpen4G) View.VISIBLE else View.GONE
             if (!isOpen4G) {
                 stopElectricShock()
             }
         }
 
-        fun wakeDevice() {//唤醒设备
+        fun wakeDevice() { //唤醒设备
             staterElectricShock()
         }
 
@@ -473,38 +363,24 @@ class Gen3Activity : BaseActivity() {
                         val services = profile.services
                         for (service in services) {
                             val characters = service.characters
-                            for (character in characters) {
-                                //LogUtil.loge("Uuid:" + character.getUuid() + "  service:" + service.getUUID());
+                            for (character in characters) { //LogUtil.loge("Uuid:" + character.getUuid() + "  service:" + service.getUUID());
                             }
                         }
                         if (code == Constants.REQUEST_SUCCESS) {
-                            bluetoothClient!!.notify(device.address,
-                                UUID.fromString("0000fee7-0000-1000-8000-00805f9b34fb"),
-                                UUID.fromString("000036f6-0000-1000-8000-00805f9b34fb"),
-                                object : BleNotifyResponse {
-                                    //添加监听
-                                    override fun onNotify(
-                                        service: UUID, character: UUID, value: ByteArray
-                                    ) {
-                                        LogUtil.loge(
-                                            "蓝牙返回:" + StringUtil.byteToHexString(
-                                                value
-                                            )
-                                        )
-                                        decryBluetoothCommand(
-                                            StringUtil.byteToHexString(
-                                                value
-                                            )
-                                        )
-                                    }
+                            bluetoothClient!!.notify(device.address, UUID.fromString("0000fee7-0000-1000-8000-00805f9b34fb"), UUID.fromString("000036f6-0000-1000-8000-00805f9b34fb"), object : BleNotifyResponse {
+                                //添加监听
+                                override fun onNotify(service: UUID, character: UUID, value: ByteArray) {
+                                    LogUtil.loge("蓝牙返回:" + StringUtil.byteToHexString(value))
+                                    decryBluetoothCommand(StringUtil.byteToHexString(value))
+                                }
 
-                                    override fun onResponse(code: Int) {
-                                        if (code == Constants.REQUEST_SUCCESS) { //监听成功
-                                            LogUtil.loge("监听成功")
-                                            deviceToken() //获取Token
-                                        }
+                                override fun onResponse(code: Int) {
+                                    if (code == Constants.REQUEST_SUCCESS) { //监听成功
+                                        LogUtil.loge("监听成功")
+                                        deviceToken() //获取Token
                                     }
-                                })
+                                }
+                            })
                         }
                     }
                 }
@@ -520,16 +396,15 @@ class Gen3Activity : BaseActivity() {
 
 
     //蓝牙状态监听
-    private val mBleConnectStatusListener: BleConnectStatusListener =
-        object : BleConnectStatusListener() {
-            override fun onConnectStatusChanged(mac: String, status: Int) {
-                if (status == Constants.STATUS_CONNECTED) { //先执行这里  再执行下面的REQUEST_SUCCESS状态
-                    //binding.bluetoothStatusText.setText("开始连接...");
-                } else if (status == Constants.STATUS_DISCONNECTED) { //断开连接
-                    //binding.bluetoothStatusText.setText(getString(R.string.language00088));
-                }
+    private val mBleConnectStatusListener: BleConnectStatusListener = object : BleConnectStatusListener() {
+        override fun onConnectStatusChanged(mac: String, status: Int) {
+            if (status == Constants.STATUS_CONNECTED) { //先执行这里  再执行下面的REQUEST_SUCCESS状态
+                //binding.bluetoothStatusText.setText("开始连接...");
+            } else if (status == Constants.STATUS_DISCONNECTED) { //断开连接
+                //binding.bluetoothStatusText.setText(getString(R.string.language00088));
             }
         }
+    }
 
     //断开蓝牙的监听
     fun disconnectBluetooth() {
@@ -545,15 +420,8 @@ class Gen3Activity : BaseActivity() {
     fun writeBluetooth(decryptKey: String) {
         LogUtil.loge("写入蓝牙的命令:$decryptKey")
         delayHandler.postDelayed({
-            bluetoothClient!!.write(
-                mac,
-                UUID.fromString("0000fee7-0000-1000-8000-00805f9b34fb"),
-                UUID.fromString("000036f5-0000-1000-8000-00805f9b34fb"),
-                StringUtil.hexStr2Bytes(decryptKey)
-            ) { code1: Int ->
-                if (code1 != Constants.REQUEST_SUCCESS) LogUtil.loge(
-                    "写入失败：$code1"
-                )
+            bluetoothClient!!.write(mac, UUID.fromString("0000fee7-0000-1000-8000-00805f9b34fb"), UUID.fromString("000036f5-0000-1000-8000-00805f9b34fb"), StringUtil.hexStr2Bytes(decryptKey)) { code1: Int ->
+                if (code1 != Constants.REQUEST_SUCCESS) LogUtil.loge("写入失败：$code1")
                 else {
                     LogUtil.loge("success")
                 }
