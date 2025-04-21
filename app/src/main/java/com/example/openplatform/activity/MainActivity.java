@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.openplatform.R;
 import com.example.openplatform.activity.equipment.Gen3Activity;
+import com.example.openplatform.activity.equipment.GenMetalActivity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
 import com.example.openplatform.databinding.ActivityMainBinding;
 import com.example.openplatform.fragment.SearchDeviceDialogFG;
@@ -119,6 +120,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 10://三代锁
                             intent = new Intent(MainActivity.this, Gen3Activity.class);
+                            break;
+                        case 13://金属锁
+                            intent = new Intent(MainActivity.this, GenMetalActivity.class);
                             break;
                     }
                     if (intent != null) {

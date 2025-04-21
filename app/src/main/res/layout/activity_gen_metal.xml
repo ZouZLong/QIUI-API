@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.openplatform.activity.equipment.GenMetalActivity.MyOnclick" />
+
+        <variable
+            name="onclick"
+            type="MyOnclick" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.unlock()}"
+            android:text="@string/language000648" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.lock()}"
+            android:text="@string/language000649" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_5">
+
+
+            <EditText
+                android:id="@+id/timedUnlocking"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_eebb78_5_l"
+                android:gravity="center"
+                android:hint="@string/textlanguage00024"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color9"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.timedUnLocking()}"
+                android:text="@string/textlanguage00026"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cccccc_5"
+                android:gravity="center"
+                android:onClick="@{() -> onclick.clearTiming()}"
+                android:text="@string/textlanguage00023"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:onClick="@{() -> onclick.closeConn()}"
+            android:text="@string/mylanguage000002" />
+
+    </LinearLayout>
+
+</layout>

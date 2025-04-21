@@ -59,6 +59,9 @@
             android:name=".activity.equipment.Gen3Activity"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".activity.equipment.GenMetalActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".activity.TestActivity"
             tools:ignore="LockedOrientationActivity" />
     </application>
