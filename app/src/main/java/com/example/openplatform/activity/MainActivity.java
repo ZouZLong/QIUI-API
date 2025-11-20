@@ -19,6 +19,7 @@ import com.example.openplatform.R;
 import com.example.openplatform.activity.equipment.Gen3Activity;
 import com.example.openplatform.activity.equipment.GenMetalActivity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
+import com.example.openplatform.activity.equipment.ShockGenMetalActivity;
 import com.example.openplatform.databinding.ActivityMainBinding;
 import com.example.openplatform.fragment.SearchDeviceDialogFG;
 import com.example.openplatform.mqtt.MqttKtManager;
@@ -66,9 +67,9 @@ public class MainActivity extends BaseActivity {
             List<String> strings = new ArrayList<>();//MQTT 订阅主题的列表
             strings.add("device\\Client_35115347524B4D1CA9A20BF2F660EF49");
             //strings.add("/6666");
-            MqttKtManager.Companion.init(this,  "abc123zbcv_" + getTimeStamp1(), strings);
+            MqttKtManager.Companion.init(this, "abc123zbcv_" + getTimeStamp1(), strings);
         } catch (Exception e) {
-            LogUtil.loge( "启动MQTT 错误：" + e);
+            LogUtil.loge("启动MQTT 错误：" + e);
         }
 
     }
@@ -123,6 +124,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 13://金属锁
                             intent = new Intent(MainActivity.this, GenMetalActivity.class);
+                            break;
+                        case 15://震动金属锁
+                            intent = new Intent(MainActivity.this, ShockGenMetalActivity.class);
                             break;
                     }
                     if (intent != null) {

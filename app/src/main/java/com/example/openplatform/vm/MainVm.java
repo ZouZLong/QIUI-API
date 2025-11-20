@@ -650,4 +650,110 @@ public class MainVm extends ViewModel {
         }
     }
 
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData13;
+    private GetDeviceTokenBean value13;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData13() {
+        if (mutableLiveData13 == null) {
+            mutableLiveData13 = new MutableLiveData<>();
+            if (value13 != null) mutableLiveData13.setValue(value13);
+        }
+        return mutableLiveData13;
+    }
+
+    public void getShakeMetalLockImmediatelyShakeCmd(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("立即震动:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("立即震动:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("立即震动:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("立即震动:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("立即震动:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("立即震动:" + response);
+                                value13 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData13.setValue(value13);
+                            } catch (Exception e) {
+                                LogUtil.loge("立即震动 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData14;
+    private GetDeviceTokenBean value14;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData14() {
+        if (mutableLiveData14 == null) {
+            mutableLiveData14 = new MutableLiveData<>();
+            if (value14 != null) mutableLiveData14.setValue(value14);
+        }
+        return mutableLiveData14;
+    }
+
+    public void stopAllShakeAndElectricCmd(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("停止震动:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("停止震动:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("停止震动:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("停止震动:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("停止震动:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("停止震动:" + response);
+                                value14 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData14.setValue(value14);
+                            } catch (Exception e) {
+                                LogUtil.loge("停止震动 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
 }

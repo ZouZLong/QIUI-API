@@ -1,0 +1,336 @@
+package com.example.openplatform.activity.equipment
+
+import android.os.Bundle
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.openplatform.Config
+import com.example.openplatform.R
+import com.example.openplatform.activity.BaseActivity
+import com.example.openplatform.bean.DecryBluetoothCommandBean
+import com.example.openplatform.bean.GetDeviceTokenBean
+import com.example.openplatform.bluetooth.BluetoothClient
+import com.example.openplatform.bluetooth.Constants
+import com.example.openplatform.bluetooth.connect.listener.BleConnectStatusListener
+import com.example.openplatform.bluetooth.connect.response.BleNotifyResponse
+import com.example.openplatform.bluetooth.model.BleGattProfile
+import com.example.openplatform.bluetooth.search.SearchRequest
+import com.example.openplatform.bluetooth.search.SearchResult
+import com.example.openplatform.bluetooth.search.response.SearchResponse
+import com.example.openplatform.databinding.ActivityGenMetalBinding
+import com.example.openplatform.databinding.ActivityKeyPod01Binding
+import com.example.openplatform.databinding.ActivityShockGenMetalBinding
+import com.example.openplatform.util.LogUtil
+import com.example.openplatform.util.StringUtil
+import com.example.openplatform.util.ToastUtil
+import com.example.openplatform.vm.MainVm
+import java.util.UUID
+
+/**
+ * 震动金属锁
+ */
+class ShockGenMetalActivity : BaseActivity() {
+
+    private var mac: String? = ""
+    private var Api_Token: String? = ""
+    private var serialNumber: String? = ""
+
+    private var bluetoothClient: BluetoothClient? = null
+    private var delayHandler: Handler? = Handler() //延迟写入数据
+
+    private lateinit var binding: ActivityShockGenMetalBinding
+    private lateinit var vm: MainVm
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_shock_gen_metal)
+        vm = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[MainVm::class.java]
+        binding.lifecycleOwner = this //绑定
+        binding.setOnclick(MyOnclick())
+
+
+        init()
+        initView()
+        initData()
+
+        setNavigationBar(0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disconnectBluetooth()
+        if (null != delayHandler) delayHandler = null
+    }
+
+    fun init() {
+        mac = intent.getStringExtra("mac")
+        Api_Token = intent.getStringExtra("Api_Token")
+        serialNumber = intent.getStringExtra("serialNumber")
+
+        bluetoothClient = BluetoothClient(this)
+        bluetoothClient!!.registerConnectStatusListener(mac, mBleConnectStatusListener) //添加监听
+
+        startSearchDevice()
+    }
+
+    fun initView() {
+    }
+
+    fun deviceToken() { //获取Token
+        val data: MutableMap<String, Any?> = HashMap()
+        data["bluetoothAddress"] = mac
+        data["serialNumber"] = serialNumber
+        data["typeId"] = 15
+        vm.getDeviceToken(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getMetalShakeLockTokenCmd", data, Api_Token)
+    }
+
+    fun decryBluetoothCommand(string: String?) { //解密
+        val data: MutableMap<String, String?> = HashMap()
+        data["lockCommand"] = string
+        data["serialNumber"] = serialNumber
+        vm.decryBluetoothCommand(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/decryBluetoothCommand", data, Api_Token)
+    }
+
+    fun keyPodUnlockCmd() { //开锁
+        val data: MutableMap<String, Any?> = HashMap()
+        data["bluetoothAddress"] = mac
+        data["serialNumber"] = serialNumber
+        data["typeId"] = 15
+        vm.getKeyPodUnlockCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getMetalShakeLockUnLockCmd", data, Api_Token)
+    }
+
+    fun keyPodLockCmd() { //关锁
+        val data: MutableMap<String, Any?> = HashMap()
+        data["bluetoothAddress"] = mac
+        data["serialNumber"] = serialNumber
+        data["typeId"] = 15
+        vm.getKeyPodLockCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getMetalShakeLockCmd", data, Api_Token)
+    }
+
+    fun buildCellMateProTimingUnlock() { //定时开锁
+        val data: MutableMap<String, Any> = HashMap()
+        data["timingDuration"] = binding.timedUnlocking.text.toString()
+        data["basicDeviceApiReq"] = createLockCmdData()
+        vm.buildCellMateProTimingUnlock(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getMetalShakeLockTimingLockCmd", data, Api_Token)
+    }
+
+    fun buildCellMateProClearTimingUnlockCmd() { //清除定时开锁
+        vm.buildCellMateProClearTimingUnlockCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getMetalShakeClearTimingLockCmd", createLockCmdData(), Api_Token)
+    }
+
+    fun getShakeMetalTimingShakeCmd() { //定时震动
+        val data: MutableMap<String, Any> = HashMap()
+        data["timingDuration"] = "6"//设置的定时时长最小值1秒,最大值8640000（即100天）
+        data["shakeDuration"] = "999"//震动时长 1 ~ 9999
+        data["shakeIntensity"] = "1"//震动强度 1 ~ 5
+        data["shakeModel"] = "2"//震动模式 1 ~ 5
+        data["basicDeviceApiReq"] = createLockCmdData()
+        vm.getShakeMetalLockImmediatelyShakeCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getShakeMetalTimingShakeCmd", data, Api_Token)
+    }
+
+    fun getShakeMetalCancelTimingShakeCmd() { //取消定时震动
+        vm.stopAllShakeAndElectricCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getShakeMetalCancelTimingShakeCmd", createLockCmdData(), Api_Token)
+    }
+
+    fun getShakeMetalLockImmediatelyShakeCmd() { //立即震动
+        val data: MutableMap<String, Any> = HashMap()
+        data["shakeDuration"] = "999"//震动时长 1 ~ 9999
+        data["shakeIntensity"] = "1"//震动强度 1 ~ 5
+        data["shakeModel"] = "2"//震动模式 1 ~ 5
+        data["basicDeviceApiReq"] = createLockCmdData()
+        vm.getShakeMetalLockImmediatelyShakeCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getShakeMetalLockImmediatelyShakeCmd", data, Api_Token)
+    }
+
+    fun getLineModelShakeCmd() { //线性震动
+        val data: MutableMap<String, Any> = HashMap()
+        data["lineSpeedValue"] = "10"//速度值 1~100
+        data["basicDeviceApiReq"] = createLockCmdData()
+        vm.getShakeMetalLockImmediatelyShakeCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/getLineModelShakeCmd", data, Api_Token)
+    }
+
+    fun stopAllShakeAndElectricCmd() { //停止震动
+        vm.stopAllShakeAndElectricCmd(this, Config.httpURL + "/system/api/device/toyMetalShakeLockBluetooth/stopAllShakeAndElectricCmd", createLockCmdData(), Api_Token)
+    }
+
+    fun initData() {
+        vm.mutableLiveData03.observe(this) { data ->  //获取Token
+            if (data.code == 200) {
+                writeBluetooth(data.data)
+            }
+        }
+
+        vm.mutableLiveData04.observe(this) { data ->  //解密
+            if (data.code == 200) {
+                ToastUtil.showToastCenter("success")
+            }
+        }
+
+        vm.mutableLiveData05.observe(this) { data ->  //开锁
+            if (data.code == 200) {
+                writeBluetooth(data.data)
+            }
+        }
+
+        vm.mutableLiveData06.observe(this) { data ->  //关锁
+            if (data.code == 200) {
+                writeBluetooth(data.data)
+            }
+        }
+
+        vm.mutableLiveData08.observe(this) { data ->  //定时开锁
+            if (data.code == 200) writeBluetooth(data.data)
+        }
+
+        vm.mutableLiveData09.observe(this) { data ->  //清除定时开锁 //清除定时电击
+            if (data.code == 200) writeBluetooth(data.data)
+        }
+
+        vm.mutableLiveData13.observe(this) { data ->  //立即震动
+            if (data.code == 200) writeBluetooth(data.data)
+        }
+
+        vm.mutableLiveData14.observe(this) { data ->  //停止震动
+            if (data.code == 200) writeBluetooth(data.data)
+        }
+    }
+
+
+    inner class MyOnclick {
+        fun unlock() { //开锁
+            keyPodUnlockCmd()
+        }
+
+        fun lock() { //关锁
+            keyPodLockCmd()
+        }
+
+        fun timedUnLocking() { //定时开锁
+            buildCellMateProTimingUnlock()
+        }
+
+        fun clearTiming() { //清除定时开锁
+            buildCellMateProClearTimingUnlockCmd()
+        }
+
+        fun addTimeShock() {//添加定时震动
+            getShakeMetalTimingShakeCmd()
+        }
+
+        fun cancelTimeShock() {//取消定时震动
+            getShakeMetalCancelTimingShakeCmd()
+        }
+
+        fun immediateVibration() {//立即震动
+            getShakeMetalLockImmediatelyShakeCmd()
+        }
+
+        fun shock(){//线性震动
+            getLineModelShakeCmd()
+        }
+
+        fun stop() {//停止震动
+            stopAllShakeAndElectricCmd()
+        }
+
+        fun closeConn() { //断开连接
+            disconnectBluetooth()
+        }
+    }
+
+
+    fun startSearchDevice() { //连接设备
+        val request = SearchRequest.Builder() //搜索设备
+            .searchBluetoothLeDevice(3000, 3) // 先扫BLE设备3次，每次3s
+            .searchBluetoothClassicDevice(5000) // 再扫经典蓝牙5s
+            .searchBluetoothLeDevice(2000) // 再扫BLE设备2s
+            .build()
+        bluetoothClient!!.search(request, object : SearchResponse {
+            override fun onSearchStarted() { //开始连接
+            }
+
+            override fun onDeviceFounded(device: SearchResult) { //连接中
+                if (device.address == mac) { //将获取的地址 于设备地址进行匹配
+                    bluetoothClient!!.stopSearch() //停止搜索设备
+                    bluetoothClient!!.connect(device.address) { code: Int, profile: BleGattProfile ->  //连接设备
+                        val services = profile.services
+                        for (service in services) {
+                            val characters = service.characters
+                            for (character in characters) {
+                                //LogUtil.loge("Uuid:" + character.getUuid() + "  service:" + service.getUUID());
+                            }
+                        }
+                        if (code == Constants.REQUEST_SUCCESS) {
+                            bluetoothClient!!.notify(device.address, UUID.fromString("0000fee5-0000-1000-8000-00805f9b34fb"), UUID.fromString("00003ff6-0000-1000-8000-00805f9b34fb"), object : BleNotifyResponse {
+                                //添加监听
+                                override fun onNotify(service: UUID, character: UUID,
+                                                      value: ByteArray) {
+                                    LogUtil.loge("蓝牙返回:" + StringUtil.byteToHexString(value))
+                                    decryBluetoothCommand(StringUtil.byteToHexString(value))
+                                }
+
+                                override fun onResponse(code: Int) {
+                                    if (code == Constants.REQUEST_SUCCESS) { //监听成功
+                                        LogUtil.loge("监听成功")
+                                        deviceToken() //获取Token
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+
+            override fun onSearchStopped() {
+            }
+
+            override fun onSearchCanceled() { //搜索已取消  成功连接到设备后调用这个方法
+            }
+        })
+    }
+
+
+    //蓝牙状态监听
+    private val mBleConnectStatusListener: BleConnectStatusListener = object : BleConnectStatusListener() {
+        override fun onConnectStatusChanged(mac: String, status: Int) {
+            if (status == Constants.STATUS_CONNECTED) { //先执行这里  再执行下面的REQUEST_SUCCESS状态
+                //binding.bluetoothStatusText.setText("开始连接...");
+            } else if (status == Constants.STATUS_DISCONNECTED) { //断开连接
+                //binding.bluetoothStatusText.setText(getString(R.string.language00088));
+            }
+        }
+    }
+
+    //断开蓝牙的监听
+    fun disconnectBluetooth() {
+        LogUtil.loge("断开连接")
+        if (bluetoothClient != null) {
+            bluetoothClient!!.stopSearch() //停止扫描
+            bluetoothClient!!.disconnect(mac) //断开连接
+            bluetoothClient!!.unregisterConnectStatusListener(mac, mBleConnectStatusListener) //停止监听
+        }
+    }
+
+    //写入蓝牙命令
+    fun writeBluetooth(decryptKey: String) {
+        LogUtil.loge("写入蓝牙的命令:$decryptKey")
+        delayHandler!!.postDelayed({
+            bluetoothClient!!.write(mac, UUID.fromString("0000fee5-0000-1000-8000-00805f9b34fb"), UUID.fromString("00003ff5-0000-1000-8000-00805f9b34fb"), StringUtil.hexStr2Bytes(decryptKey)) { code1: Int ->
+                if (code1 != Constants.REQUEST_SUCCESS) LogUtil.loge("写入失败：$code1")
+                else {
+                    LogUtil.loge("success")
+                }
+            }
+        }, 100)
+    }
+
+    // 封装参数的方法
+    private fun createLockCmdData(): MutableMap<String, Any?> {
+        val data: MutableMap<String, Any?> = HashMap()
+        data["bluetoothAddress"] = mac
+        data["serialNumber"] = serialNumber
+        data["typeId"] = 15
+        return data
+    }
+
+}

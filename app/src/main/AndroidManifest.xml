@@ -64,6 +64,10 @@
         <activity
             android:name=".activity.TestActivity"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.equipment.ShockGenMetalActivity"
+            tools:ignore="LockedOrientationActivity" />
+
     </application>
 
 </manifest>
