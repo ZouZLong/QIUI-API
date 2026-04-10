@@ -2586,6 +2586,12 @@
     <string name="mylanguage000006">Stop the shock</string>
     <string name="mylanguage000007">Setting up the MQTT service</string>
     <string name="mylanguage000008">Wake up successfully</string>
+    <string name="mylanguage000009">Please enter the clientId from the developer platform.</string>
+    <string name="mylanguage000010">Stop vibration</string>
+    <string name="mylanguage000011">Enable offline mode</string>
+    <string name="mylanguage000012">Turn off offline mode</string>
+
+
 
 
     <string name="lan">英语</string>

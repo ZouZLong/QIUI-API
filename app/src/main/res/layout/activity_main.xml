@@ -19,6 +19,13 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:hint="@string/mylanguage000009"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
 
         <Button
             android:layout_width="match_parent"

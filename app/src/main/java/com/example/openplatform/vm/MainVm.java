@@ -756,4 +756,163 @@ public class MainVm extends ViewModel {
         }
     }
 
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData15;
+    private GetDeviceTokenBean value15;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData15() {
+        if (mutableLiveData15 == null) {
+            mutableLiveData15 = new MutableLiveData<>();
+            if (value15 != null) mutableLiveData15.setValue(value15);
+        }
+        return mutableLiveData15;
+    }
+
+    public void generatePearFlowerThreeToyElectric(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("立即电击:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("立即电击:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("立即电击:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("立即电击:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("立即电击:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("立即电击:" + response);
+                                value15 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData15.setValue(value15);
+                            } catch (Exception e) {
+                                LogUtil.loge("立即电击 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData16;
+    private GetDeviceTokenBean value16;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData16() {
+        if (mutableLiveData16 == null) {
+            mutableLiveData16 = new MutableLiveData<>();
+            if (value16 != null) mutableLiveData16.setValue(value16);
+        }
+        return mutableLiveData16;
+    }
+
+    public void generatePearFlowerThreeToyCancelElectric(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("停止电击:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("停止电击:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("停止电击:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("停止电击:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("停止电击:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("停止电击:" + response);
+                                value16 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData16.setValue(value16);
+                            } catch (Exception e) {
+                                LogUtil.loge("停止电击 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
+
+    private MutableLiveData<GetDeviceTokenBean> mutableLiveData17;
+    private GetDeviceTokenBean value17;
+
+    public MutableLiveData<GetDeviceTokenBean> getMutableLiveData17() {
+        if (mutableLiveData17 == null) {
+            mutableLiveData17 = new MutableLiveData<>();
+            if (value17 != null) mutableLiveData17.setValue(value17);
+        }
+        return mutableLiveData17;
+    }
+
+    public void time(Context context, String url, Map<String, Object> data, String APi_Token) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String string = EncryptUtil.encrypt(jsonObject.toString());
+            LogUtil.loge("定时:"+string);
+            OkHttpUtils.postString().url(url).addHeader("Environment", "TEST").addHeader("Authorization", APi_Token)
+                    .content(string).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .tag(context).build().execute(new StringCallback() {
+                        @Override
+                        public void onBefore(Request request, int id) {
+                            LogUtil.loge("定时:onBefore");
+                        }
+
+                        @Override
+                        public void onAfter(int id) {
+                            LogUtil.loge("定时:onAfter");
+                        }
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtil.loge("定时:" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                LogUtil.loge("定时:" + response);
+                                response = EncryptUtil.decrypt(response);
+                                LogUtil.loge("定时:" + response);
+                                value17 = new Gson().fromJson(response, GetDeviceTokenBean.class);
+                                mutableLiveData17.setValue(value17);
+                            } catch (Exception e) {
+                                LogUtil.loge("定时 错误：" + e);
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            LogUtil.loge("网络异常信息：" + e.toString());
+        }
+    }
+
 }

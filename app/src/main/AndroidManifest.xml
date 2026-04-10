@@ -67,6 +67,9 @@
         <activity
             android:name=".activity.equipment.ShockGenMetalActivity"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.equipment.AnalPlug2Activity"
+            tools:ignore="LockedOrientationActivity" />
 
     </application>
 

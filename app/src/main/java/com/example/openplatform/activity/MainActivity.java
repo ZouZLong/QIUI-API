@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.openplatform.R;
+import com.example.openplatform.activity.equipment.AnalPlug2Activity;
 import com.example.openplatform.activity.equipment.Gen3Activity;
 import com.example.openplatform.activity.equipment.GenMetalActivity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity {
 
     public void getPlatformApiToken() {//获取平台Token
         Map<String, String> data = new HashMap<>();
-        data.put("clientId", "Client_35115347524B4D1CA9A20BF2F660EF49");
+        data.put("clientId", binding.editText.getText().toString());
         data.put("grantType", "client_credentials");
         vm.getPlatformApiToken(this, httpURL + "/system/api/device/common/getPlatformApiToken", data);
     }
@@ -128,6 +129,10 @@ public class MainActivity extends BaseActivity {
                         case 15://震动金属锁
                             intent = new Intent(MainActivity.this, ShockGenMetalActivity.class);
                             break;
+                        case 18://二代肛塞
+                            intent = new Intent(MainActivity.this, AnalPlug2Activity.class);
+                            break;
+
                     }
                     if (intent != null) {
                         intent.putExtra("mac", data.getData().getBluetoothAddress());
@@ -153,6 +158,13 @@ public class MainActivity extends BaseActivity {
     public class MyOnclick {
 
         public void getApiToken() {//获取平台Token
+            if (binding.editText.getText().toString().isEmpty()) {
+                ToastUtil.showToastCenter(getString(R.string.mylanguage000009));
+                return;
+            }
+            if (binding.editText.getText().toString().equals("1715")) {//如果是自己的就用这个
+                binding.editText.setText("Client_35115347524B4D1CA9A20BF2F660EF49");
+            }
             getPlatformApiToken();
         }
 
