@@ -198,7 +198,7 @@ class KeyPodMetalActivity : BaseActivity() {
                             }
                         }
                         if (code == Constants.REQUEST_SUCCESS) {
-                            bluetoothClient!!.notify(device.address, UUID.fromString("0000fee5-0000-1000-8000-00805f9b34fb"), UUID.fromString("00003ff6-0000-1000-8000-00805f9b34fb"), object : BleNotifyResponse {
+                            bluetoothClient!!.notify(device.address, UUID.fromString("00000b30-0000-1000-8000-00805f9b34fb"), UUID.fromString("00000b31-0000-1000-8000-00805f9b34fb"), object : BleNotifyResponse {
                                 //添加监听
                                 override fun onNotify(service: UUID, character: UUID,
                                                       value: ByteArray) {
@@ -252,7 +252,7 @@ class KeyPodMetalActivity : BaseActivity() {
     fun writeBluetooth(decryptKey: String) {
         LogUtil.loge("写入蓝牙的命令:$decryptKey")
         delayHandler!!.postDelayed({
-            bluetoothClient!!.write(mac, UUID.fromString("0000fee5-0000-1000-8000-00805f9b34fb"), UUID.fromString("00003ff5-0000-1000-8000-00805f9b34fb"), StringUtil.hexStr2Bytes(decryptKey)) { code1: Int ->
+            bluetoothClient!!.write(mac, UUID.fromString("00000b30-0000-1000-8000-00805f9b34fb"), UUID.fromString("00000b32-0000-1000-8000-00805f9b34fb"), StringUtil.hexStr2Bytes(decryptKey)) { code1: Int ->
                 if (code1 != Constants.REQUEST_SUCCESS) LogUtil.loge("写入失败：$code1")
                 else {
                     LogUtil.loge("success")
