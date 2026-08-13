@@ -153,6 +153,8 @@ public class MainActivity extends BaseActivity {
         vm.getMutableLiveData02().observe(this, data -> {//平台绑定设备
             if (data.getCode() == 200) {
                 queryDeviceInfo();
+            }else{
+                ToastUtil.showToastCenter(data.getMessage());
             }
         });
 

@@ -81,42 +81,42 @@ class FemBoyActivity : BaseActivity() {
         val data: MutableMap<String, Any?> = HashMap()
         data["bluetoothAddress"] = mac
         data["serialNumber"] = serialNumber
-        data["typeId"] = 13
-        vm!!.getDeviceToken(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/getMetalLockTokenCmd", data, Api_Token)
+        data["typeId"] = 19
+        vm!!.getDeviceToken(this, Config.httpURL + "/system/api/device/sissyStarLock/getToyToken", data, Api_Token)
     }
 
     fun decryBluetoothCommand(string: String?) { //解密
         val data: MutableMap<String, String?> = HashMap()
         data["lockCommand"] = string
         data["serialNumber"] = serialNumber
-        vm!!.decryBluetoothCommand(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/decryBluetoothCommand", data, Api_Token)
+        vm!!.decryBluetoothCommand(this, Config.httpURL + "/system/api/device/sissyStarLock/decryBluetoothCommand", data, Api_Token)
     }
 
     fun keyPodUnlockCmd() { //开锁
         val data: MutableMap<String, Any?> = HashMap()
         data["bluetoothAddress"] = mac
         data["serialNumber"] = serialNumber
-        data["typeId"] = 13
-        vm!!.getKeyPodUnlockCmd(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/getMetalLockUnLockCmd", data, Api_Token)
+        data["typeId"] = 19
+        vm!!.getKeyPodUnlockCmd(this, Config.httpURL + "/system/api/device/sissyStarLock/getSissyStarUnLockCmd", data, Api_Token)
     }
 
     fun keyPodLockCmd() { //关锁
         val data: MutableMap<String, Any?> = HashMap()
         data["bluetoothAddress"] = mac
         data["serialNumber"] = serialNumber
-        data["typeId"] = 13
-        vm!!.getKeyPodLockCmd(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/getMetalLockCmd", data, Api_Token)
+        data["typeId"] = 19
+        vm!!.getKeyPodLockCmd(this, Config.httpURL + "/system/api/device/sissyStarLock/getSissyStarLockCmd", data, Api_Token)
     }
 
     fun buildCellMateProTimingUnlock() { //定时开锁
         val data: MutableMap<String, Any> = HashMap()
         data["timingDuration"] = binding?.timedUnlocking?.text.toString()
         data["basicDeviceApiReq"] = createLockCmdData()
-        vm!!.buildCellMateProTimingUnlock(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/getMetalLockTimingLockCmd", data, Api_Token)
+        vm!!.buildCellMateProTimingUnlock(this, Config.httpURL + "/system/api/device/sissyStarLock/getSissyStarTimingLockCmd", data, Api_Token)
     }
 
     fun buildCellMateProClearTimingUnlockCmd() { //清除定时开锁
-        vm!!.buildCellMateProClearTimingUnlockCmd(this, Config.httpURL + "/system/api/device/toyMetalLockBluetooth/getMetalClearTimingLockCmd", createLockCmdData(), Api_Token)
+        vm!!.buildCellMateProClearTimingUnlockCmd(this, Config.httpURL + "/system/api/device/sissyStarLock/getSissyStarLockClearTimingLockCmd", createLockCmdData(), Api_Token)
     }
 
 
@@ -268,7 +268,7 @@ class FemBoyActivity : BaseActivity() {
         val data: MutableMap<String, Any?> = HashMap()
         data["bluetoothAddress"] = mac
         data["serialNumber"] = serialNumber
-        data["typeId"] = 13
+        data["typeId"] = 19
         return data
     }
 
