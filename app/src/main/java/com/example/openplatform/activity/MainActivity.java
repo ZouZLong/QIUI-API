@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.openplatform.R;
 import com.example.openplatform.activity.equipment.AnalPlug2Activity;
+import com.example.openplatform.activity.equipment.FemBoyActivity;
 import com.example.openplatform.activity.equipment.Gen3Activity;
 import com.example.openplatform.activity.equipment.GenMetalActivity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
@@ -131,6 +132,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 18://二代肛塞
                             intent = new Intent(MainActivity.this, AnalPlug2Activity.class);
+                            break;
+                        case 19://伪娘锁
+                            intent = new Intent(MainActivity.this, FemBoyActivity.class);
                             break;
 
                     }

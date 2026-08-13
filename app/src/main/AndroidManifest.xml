@@ -70,6 +70,10 @@
         <activity
             android:name=".activity.equipment.AnalPlug2Activity"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.equipment.FemBoyActivity"
+            tools:ignore="LockedOrientationActivity" />
+
 
     </application>
 
