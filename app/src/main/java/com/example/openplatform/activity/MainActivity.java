@@ -21,6 +21,7 @@ import com.example.openplatform.activity.equipment.FemBoyActivity;
 import com.example.openplatform.activity.equipment.Gen3Activity;
 import com.example.openplatform.activity.equipment.GenMetalActivity;
 import com.example.openplatform.activity.equipment.KeyPodActivity01;
+import com.example.openplatform.activity.equipment.KeyPodMetalActivity;
 import com.example.openplatform.activity.equipment.ShockGenMetalActivity;
 import com.example.openplatform.databinding.ActivityMainBinding;
 import com.example.openplatform.fragment.SearchDeviceDialogFG;
@@ -135,6 +136,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 19://伪娘锁
                             intent = new Intent(MainActivity.this, FemBoyActivity.class);
+                            break;
+                        case 20://金属钥匙盒
+                            intent = new Intent(MainActivity.this, KeyPodMetalActivity.class);
                             break;
 
                     }

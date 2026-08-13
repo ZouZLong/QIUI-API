@@ -73,6 +73,9 @@
         <activity
             android:name=".activity.equipment.FemBoyActivity"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.equipment.KeyPodMetalActivity"
+            tools:ignore="LockedOrientationActivity" />
 
 
     </application>
